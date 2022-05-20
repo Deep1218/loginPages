@@ -31,74 +31,118 @@
                   class="fs-2 text fw-bold text-uppercase"
                   style="color: #060c1c"
                 >
-                  login
+                  create
                 </h3>
                 <h3
                   class="fs-2 text fw-bold text-uppercase"
                   style="color: #ff7600"
                 >
-                  to your account
+                  your account
                 </h3>
               </div>
               <!-- login form -->
-              <form class="mt-4">
+              <form
+                class="mt-4 needs-validation"
+                [formGroup]="newAccount"
+                (ngSubmit)="onSubmit()"
+              >
+                <div class="row mb-3 pe-5 g-2">
+                  <div class="col-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-valid': newAccount.get('fullName')?.valid,
+                        'is-invalid':
+                          !newAccount.get('fullName')?.valid &&
+                          newAccount.get('fullName')?.touched
+                      }"
+                      placeholder="Full Name*"
+                      formControlName="fullName"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-valid': newAccount.get('phoneNumber')?.valid,
+                        'is-invalid':
+                          !newAccount.get('phoneNumber')?.valid &&
+                          newAccount.get('phoneNumber')?.touched
+                      }"
+                      placeholder="Phone Number*"
+                      formControlName="phoneNumber"
+                    />
+                  </div>
+                </div>
+
                 <div class="mb-3 pe-5">
                   <input
                     type="email"
                     class="form-control"
-                    placeholder="Email"
+                    [ngClass]="{
+                      'is-valid': newAccount.get('email')?.valid,
+                      'is-invalid':
+                        !newAccount.get('email')?.valid &&
+                        newAccount.get('email')?.touched
+                    }"
+                    placeholder="Email*"
+                    formControlName="email"
                   />
                 </div>
-                <div class="mb-4 pe-5">
+                <div class="mb-5 pe-5">
                   <input
                     type="password"
                     class="form-control"
-                    placeholder="Password"
+                    [ngClass]="{
+                      'is-valid': newAccount.get('password')?.valid,
+                      'is-invalid':
+                        !newAccount.get('password')?.valid &&
+                        newAccount.get('password')?.touched
+                    }"
+                    placeholder="Password*"
+                    formControlName="password"
                   />
-                  <a class="mx-1" routerLink="forgotPassword"
-                    >forgot password<i
-                      class="fa fa-question"
-                      aria-hidden="true"
-                    ></i
-                  ></a>
                 </div>
                 <!-- login button and link -->
                 <div
                   class="d-flex align-items-center justify-content-between pe-5"
                 >
                   <button
+                    type="submit"
                     class="btn btn-primary px-4 fw-bold rounded-pill text-uppercase"
                     style="background-color: #060c1c"
                   >
-                    Login
+                    create
                   </button>
-                  <p class="text-muted fw-bold m-0">
-                    Not a member!
-                    <a routerLink="newAccount">
-                      Create Account
-                      <i class="fa fa-arrow-right ms-1" aria-hidden="true"></i>
-                    </a>
+                  <p class="fw-bold text-muted m-0">
+                    Already a member?
+                    <a routerLink=""
+                      >login now<i
+                        class="fa fa-arrow-right ms-1"
+                        aria-hidden="true"
+                      ></i
+                    ></a>
                   </p>
                 </div>
               </form>
-              <hr class="d-block my-5" />
+              <hr class="d-block my-4" />
               <!-- Login API -->
               <div
-                class="d-flex align-items-center justify-content-between px-3"
+                class="d-flex align-items-center justify-content-evenly px-3"
               >
                 <button
                   class="btn btn-light rounded-pill px-3 py-1"
                   style="border-color: #060c1c !important; color: #060c1c"
                 >
-                  <i class="fa fa-google me-2" aria-hidden="true"></i>Login with
-                  Google
+                  <i class="fa fa-google me-2" aria-hidden="true"></i>Google
                 </button>
                 <button
                   class="btn btn-light rounded-pill px-3 py-1"
                   style="border-color: #060c1c !important; color: #060c1c"
                 >
-                  <i class="fa fa-facebook me-2" aria-hidden="true"></i>Login
-                  with Facebook
+                  <i class="fa fa-facebook me-2" aria-hidden="true"></i>Facebook
                 </button>
               </div>
             </div>
@@ -109,7 +153,7 @@
                 style="
                   background-color: #fff1e8;
                   border-radius: 20px;
-                  background-image: url(assets/img/Login-bro.svg);
+                  background-image: url(assets/img/new-account.svg);
                   background-repeat: no-repeat;
                   background-size: 110%;
                   background-position: center;
