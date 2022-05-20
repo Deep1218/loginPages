@@ -91,20 +91,37 @@
                     formControlName="email"
                   />
                 </div>
-                <div class="mb-5 pe-5">
-                  <input
-                    type="password"
-                    class="form-control"
-                    [ngClass]="{
-                      'is-valid': newAccount.get('password')?.valid,
-                      'is-invalid':
-                        !newAccount.get('password')?.valid &&
-                        newAccount.get('password')?.touched
-                    }"
-                    placeholder="Password*"
-                    formControlName="password"
-                  />
+                <div class="row mb-5 pe-5 g-2">
+                  <div class="col-6">
+                    <input
+                      type="password"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-valid': newAccount.get('password')?.valid,
+                        'is-invalid':
+                          !newAccount.get('password')?.valid &&
+                          newAccount.get('password')?.touched
+                      }"
+                      placeholder="Password*"
+                      formControlName="password"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <input
+                      type="password"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-valid': newAccount.get('confirmPassword')?.valid,
+                        'is-invalid':
+                          !newAccount.get('confirmPassword')?.valid &&
+                          newAccount.get('confirmPassword')?.touched
+                      }"
+                      placeholder="Confirm Password*"
+                      formControlName="confirmPassword"
+                    />
+                  </div>
                 </div>
+                <div class="mb-5 pe-5"></div>
                 <!-- login button and link -->
                 <div
                   class="d-flex align-items-center justify-content-between pe-5"
