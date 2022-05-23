@@ -41,19 +41,37 @@
                 </h3>
               </div>
               <!-- login form -->
-              <form class="mt-4">
+              <form
+                class="mt-4"
+                [formGroup]="loginForm"
+                (ngSubmit)="onSubmitLogin()"
+              >
                 <div class="mb-3 pe-5">
                   <input
                     type="email"
                     class="form-control"
+                    [ngClass]="{
+                      'is-valid': loginForm.get('email')?.valid,
+                      'is-invalid':
+                        !loginForm.get('email')?.valid &&
+                        loginForm.get('email')?.touched
+                    }"
                     placeholder="Email"
+                    formControlName="email"
                   />
                 </div>
                 <div class="mb-4 pe-5">
                   <input
                     type="password"
                     class="form-control"
+                    [ngClass]="{
+                      'is-valid': loginForm.get('password')?.valid,
+                      'is-invalid':
+                        !loginForm.get('password')?.valid &&
+                        loginForm.get('password')?.touched
+                    }"
                     placeholder="Password"
+                    formControlName="password"
                   />
                   <a class="mx-1" routerLink="forgotPassword"
                     >forgot password<i

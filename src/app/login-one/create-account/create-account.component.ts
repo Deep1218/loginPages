@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomValidators } from '../providers/custom-validator';
+import { CustomValidators } from '../../providers/custom-validator';
 
 @Component({
   selector: 'app-create-account',
@@ -18,7 +18,7 @@ export class CreateAccountComponent implements OnInit {
           [
             Validators.required,
             Validators.maxLength(30),
-            Validators.pattern('^[a-z A-Z]+$'), // Done
+            Validators.pattern('^[a-z A-Z]+$'),
           ],
         ],
         phoneNumber: [
@@ -32,7 +32,15 @@ export class CreateAccountComponent implements OnInit {
             ),
           ],
         ],
-        email: ['', [Validators.required, Validators.email]],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              '([a-zA-Z\\.\\-_]+)?[a-zA-Z]+@[a-z-_]+(\\.[a-z]+){1,}'
+            ),
+          ],
+        ],
         //- at least 8 characters
         // - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
         // - Can contain special characters
