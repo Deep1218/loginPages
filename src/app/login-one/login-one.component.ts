@@ -1,5 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GoogleApiService, UserInfo } from '../shared/google-api.service';
 
 @Component({
   selector: 'app-login-one',
@@ -8,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginOneComponent implements OnInit, DoCheck {
   loginForm: FormGroup;
+  userInfo!: UserInfo;
 
   emailTooltipPosition: string = '';
   emailTooltipMessage: string = '';
@@ -15,7 +17,14 @@ export class LoginOneComponent implements OnInit, DoCheck {
   passwordTooltipPosition: string = '';
   passwordTooltipMessage: string = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private readonly googleApi: GoogleApiService
+  ) {
+    googleApi.userProfileSubject.subscribe((info) => {
+      this.userInfo = info;
+    });
+
     this.loginForm = this.fb.group({
       email: [
         '',
@@ -76,5 +85,8 @@ export class LoginOneComponent implements OnInit, DoCheck {
   }
   onSubmitLogin() {
     console.log(this.loginForm.errors, this.loginForm.get('email')?.invalid);
+  }
+  loginWithGoogle() {
+    console.log(this.userInfo);
   }
 }
