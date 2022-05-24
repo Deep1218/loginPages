@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/loginOne', //TODO change before devlopment
+    redirectTo: 'loginOne', //TODO change before devlopment
     pathMatch: 'full',
   },
 ];

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,8 +6,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css'],
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit, DoCheck {
   forgotForm!: FormGroup;
+
+  emailTooltipPosition: string = '';
+  emailTooltipMessage: string = '';
 
   constructor(private fb: FormBuilder) {
     this.forgotForm = this.fb.group({
@@ -24,6 +27,24 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  ngDoCheck(): void {
+    //Email ToolTip
+    if (this.forgotForm.get('email')?.touched) {
+      if (this.forgotForm.get('email')?.valid) {
+        this.emailTooltipPosition = '';
+        this.emailTooltipMessage = '';
+      } else {
+        //1st Message
+        this.emailTooltipPosition = 'right';
+        this.emailTooltipMessage = 'Email is required.';
+
+        if (this.forgotForm.get('email')?.dirty) {
+          //2nd Message
+          this.emailTooltipMessage = 'Not a valid email.';
+        }
+      }
+    }
+  }
 
   onSubmitSend() {
     console.log(this.forgotForm);

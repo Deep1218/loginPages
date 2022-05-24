@@ -59,6 +59,8 @@
                       }"
                       placeholder="Full Name*"
                       formControlName="fullName"
+                      [placement]="fullNameTooltipPosition"
+                      [ngbTooltip]="fullNameTooltipMessage"
                     />
                   </div>
                   <div class="col-6">
@@ -73,6 +75,8 @@
                       }"
                       placeholder="Phone Number*"
                       formControlName="phoneNumber"
+                      [placement]="phoneNumberTooltipPosition"
+                      [ngbTooltip]="phoneNumberTooltipMessage"
                     />
                   </div>
                 </div>
@@ -89,6 +93,8 @@
                     }"
                     placeholder="Email*"
                     formControlName="email"
+                    [placement]="emailTooltipPosition"
+                    [ngbTooltip]="emailTooltipMessage"
                   />
                 </div>
                 <div class="row mb-5 pe-5 g-2">
@@ -104,6 +110,8 @@
                       }"
                       placeholder="Password*"
                       formControlName="password"
+                      [placement]="passwordTooltipPosition"
+                      [ngbTooltip]="passwordTooltipMessage"
                     />
                   </div>
                   <div class="col-6">
@@ -118,6 +126,8 @@
                       }"
                       placeholder="Confirm Password*"
                       formControlName="confirmPassword"
+                      [placement]="confirmPasswordTooltipPosition"
+                      [ngbTooltip]="confirmPasswordTooltipMessage"
                     />
                   </div>
                 </div>

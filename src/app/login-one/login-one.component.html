@@ -58,6 +58,8 @@
                     }"
                     placeholder="Email"
                     formControlName="email"
+                    [placement]="emailTooltipPosition"
+                    [ngbTooltip]="emailTooltipMessage"
                   />
                 </div>
                 <div class="mb-4 pe-5">
@@ -72,6 +74,8 @@
                     }"
                     placeholder="Password"
                     formControlName="password"
+                    [placement]="passwordTooltipPosition"
+                    [ngbTooltip]="passwordTooltipMessage"
                   />
                   <a class="mx-1" routerLink="forgotPassword"
                     >forgot password<i
@@ -107,6 +111,7 @@
                 <button
                   class="btn btn-light rounded-pill px-3 py-1"
                   style="border-color: #060c1c !important; color: #060c1c"
+                  (click)="loginWithGoogle()"
                 >
                   <i class="fa fa-google me-2" aria-hidden="true"></i>Login with
                   Google

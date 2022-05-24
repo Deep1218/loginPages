@@ -14,6 +14,11 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     ForgotPasswordComponent,
     CreateAccountComponent,
   ],
-  imports: [CommonModule, LoginOneRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    LoginOneRoutingModule,
+    ReactiveFormsModule,
+    NgbModule,
+  ],
 })
 export class LoginOneModule {}
