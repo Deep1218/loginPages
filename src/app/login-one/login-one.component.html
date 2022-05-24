@@ -58,6 +58,8 @@
                     }"
                     placeholder="Email"
                     formControlName="email"
+                    [placement]="emailTooltipPosition"
+                    [ngbTooltip]="emailTooltipMessage"
                   />
                 </div>
                 <div class="mb-4 pe-5">
@@ -72,6 +74,8 @@
                     }"
                     placeholder="Password"
                     formControlName="password"
+                    [placement]="passwordTooltipPosition"
+                    [ngbTooltip]="passwordTooltipMessage"
                   />
                   <a class="mx-1" routerLink="forgotPassword"
                     >forgot password<i

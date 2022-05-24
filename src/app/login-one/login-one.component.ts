@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,8 +6,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './login-one.component.html',
   styleUrls: ['./login-one.component.css'],
 })
-export class LoginOneComponent implements OnInit {
+export class LoginOneComponent implements OnInit, DoCheck {
   loginForm: FormGroup;
+
+  emailTooltipPosition: string = '';
+  emailTooltipMessage: string = '';
+
+  passwordTooltipPosition: string = '';
+  passwordTooltipMessage: string = '';
+
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       email: [
@@ -32,7 +39,42 @@ export class LoginOneComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  ngDoCheck(): void {
+    //Email ToolTip
+    if (this.loginForm.get('email')?.touched) {
+      if (this.loginForm.get('email')?.valid) {
+        this.emailTooltipPosition = '';
+        this.emailTooltipMessage = '';
+      } else {
+        //1st Message
+        this.emailTooltipPosition = 'right';
+        this.emailTooltipMessage = 'Email is required.';
+
+        if (this.loginForm.get('email')?.dirty) {
+          //2nd Message
+          this.emailTooltipMessage = 'Not a valid email.';
+        }
+      }
+    }
+    //Password ToolTip
+    if (this.loginForm.get('password')?.touched) {
+      if (this.loginForm.get('password')?.valid) {
+        this.passwordTooltipPosition = '';
+        this.passwordTooltipMessage = '';
+      } else {
+        //1st Message
+        this.passwordTooltipPosition = 'right';
+        this.passwordTooltipMessage = 'Password is required.';
+
+        if (this.loginForm.get('password')?.dirty) {
+          //2nd Message
+          this.passwordTooltipMessage = 'Not a valid password.';
+        }
+      }
+    }
+  }
   onSubmitLogin() {
-    console.log(this.loginForm);
+    console.log(this.loginForm.errors, this.loginForm.get('email')?.invalid);
   }
 }
