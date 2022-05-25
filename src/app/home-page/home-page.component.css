@@ -1,0 +1,16 @@
+.loginBtn{
+    color: #ff7600 !important;
+    border-color: #ff7600 !important;
+}
+.loginBtn:hover{
+    color: #fdfdfd !important;
+    background-color: #ff7600;
+}
+.signupBtn{
+    color: #060c1c !important;
+    border-color: #060c1c !important;
+}
+.signupBtn:hover{
+    color: #fdfdfd !important;
+    background-color: #060c1c;
+}
