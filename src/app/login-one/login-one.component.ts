@@ -75,7 +75,7 @@ export class LoginOneComponent implements OnInit, DoCheck {
     }
   }
   onSubmitLogin() {
-    console.log(this.loginForm.errors, this.loginForm.get('email')?.invalid);
+    console.log(this.loginForm.value);
   }
   loginWithGoogle() {}
 }

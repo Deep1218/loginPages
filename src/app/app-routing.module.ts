@@ -8,9 +8,19 @@ const routes: Routes = [
       import('./login-one/login-one.module').then((m) => m.LoginOneModule),
   },
   {
+    path: 'home',
+    loadChildren: () =>
+      import('./home-page/home-page.module').then((m) => m.HomePageModule),
+  },
+  {
     path: '',
-    redirectTo: 'loginOne', //TODO change before devlopment
+    redirectTo: 'loginOne', //TODO change before completion
     pathMatch: 'full',
+  },
+  {
+    path: 'home-page',
+    loadChildren: () =>
+      import('./home-page/home-page.module').then((m) => m.HomePageModule),
   },
 ];
 
