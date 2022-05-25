@@ -1,0 +1,195 @@
+<div
+  class="d-flex container-fluid justify-content-center align-items-center p-4"
+  style="width: 100%; height: 100vh"
+>
+  <div class="row rounded">
+    <div class="col-12">
+      <div
+        class="card p-4 shadow"
+        style="background-color: #fdfdfd; height: 580px; width: 1050px"
+      >
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <!-- Company name and Button -->
+              <div
+                class="d-flex align-items-center justify-content-between mb-5"
+              >
+                <h4 class="fs-4 text fw-bold" style="color: #060c1c">
+                  Login Page One
+                </h4>
+                <button
+                  class="btn btn-sm btn-primary px-4 fw-bold rounded-pill text-uppercase"
+                  style="background-color: #060c1c"
+                >
+                  Home
+                </button>
+              </div>
+              <!-- Login text and sub-text -->
+              <div class="col-8">
+                <h3
+                  class="fs-2 text fw-bold text-uppercase"
+                  style="color: #060c1c"
+                >
+                  create
+                </h3>
+                <h3
+                  class="fs-2 text fw-bold text-uppercase"
+                  style="color: #ff7600"
+                >
+                  your account
+                </h3>
+              </div>
+              <!-- login form -->
+              <form
+                class="mt-4 needs-validation"
+                [formGroup]="newAccount"
+                (ngSubmit)="onSubmit()"
+              >
+                <div class="row mb-3 pe-5 g-2">
+                  <div class="col-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-valid': newAccount.get('fullName')?.valid,
+                        'is-invalid':
+                          !newAccount.get('fullName')?.valid &&
+                          newAccount.get('fullName')?.touched
+                      }"
+                      placeholder="Full Name*"
+                      formControlName="fullName"
+                      [placement]="fullNameTooltipPosition"
+                      [ngbTooltip]="fullNameTooltipMessage"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-valid': newAccount.get('phoneNumber')?.valid,
+                        'is-invalid':
+                          !newAccount.get('phoneNumber')?.valid &&
+                          newAccount.get('phoneNumber')?.touched
+                      }"
+                      placeholder="Phone Number*"
+                      formControlName="phoneNumber"
+                      [placement]="phoneNumberTooltipPosition"
+                      [ngbTooltip]="phoneNumberTooltipMessage"
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-3 pe-5">
+                  <input
+                    type="email"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-valid': newAccount.get('email')?.valid,
+                      'is-invalid':
+                        !newAccount.get('email')?.valid &&
+                        newAccount.get('email')?.touched
+                    }"
+                    placeholder="Email*"
+                    formControlName="email"
+                    [placement]="emailTooltipPosition"
+                    [ngbTooltip]="emailTooltipMessage"
+                  />
+                </div>
+                <div class="row mb-5 pe-5 g-2">
+                  <div class="col-6">
+                    <input
+                      type="password"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-valid': newAccount.get('password')?.valid,
+                        'is-invalid':
+                          !newAccount.get('password')?.valid &&
+                          newAccount.get('password')?.touched
+                      }"
+                      placeholder="Password*"
+                      formControlName="password"
+                      [placement]="passwordTooltipPosition"
+                      [ngbTooltip]="passwordTooltipMessage"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <input
+                      type="password"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-valid': newAccount.get('confirmPassword')?.valid,
+                        'is-invalid':
+                          !newAccount.get('confirmPassword')?.valid &&
+                          newAccount.get('confirmPassword')?.touched
+                      }"
+                      placeholder="Confirm Password*"
+                      formControlName="confirmPassword"
+                      [placement]="confirmPasswordTooltipPosition"
+                      [ngbTooltip]="confirmPasswordTooltipMessage"
+                    />
+                  </div>
+                </div>
+                <div class="mb-5 pe-5"></div>
+                <!-- login button and link -->
+                <div
+                  class="d-flex align-items-center justify-content-between pe-5"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4 fw-bold rounded-pill text-uppercase"
+                    style="background-color: #060c1c"
+                  >
+                    create
+                  </button>
+                  <p class="fw-bold text-muted m-0">
+                    Already a member?
+                    <a routerLink=""
+                      >login now<i
+                        class="fa fa-arrow-right ms-1"
+                        aria-hidden="true"
+                      ></i
+                    ></a>
+                  </p>
+                </div>
+              </form>
+              <hr class="d-block my-4" />
+              <!-- Login API -->
+              <div
+                class="d-flex align-items-center justify-content-evenly px-3"
+              >
+                <button
+                  class="btn btn-light rounded-pill px-3 py-1"
+                  style="border-color: #060c1c !important; color: #060c1c"
+                >
+                  <i class="fa fa-google me-2" aria-hidden="true"></i>Google
+                </button>
+                <button
+                  class="btn btn-light rounded-pill px-3 py-1"
+                  style="border-color: #060c1c !important; color: #060c1c"
+                >
+                  <i class="fa fa-facebook me-2" aria-hidden="true"></i>Facebook
+                </button>
+              </div>
+            </div>
+            <!-- Illustration on right -->
+            <div class="col-6 px-4">
+              <div
+                class="h-100 w-100 d-flex justify-content-center align-items-center"
+                style="
+                  background-color: #fff1e8;
+                  border-radius: 20px;
+                  background-image: url(assets/img/new-account.svg);
+                  background-repeat: no-repeat;
+                  background-size: 110%;
+                  background-position: center;
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
