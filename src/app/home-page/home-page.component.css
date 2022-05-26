@@ -1,16 +1,179 @@
-.loginBtn{
-    color: #ff7600 !important;
-    border-color: #ff7600 !important;
+.loginBtn {
+  color: #ff7600 !important;
+  border-color: #ff7600 !important;
 }
-.loginBtn:hover{
-    color: #fdfdfd !important;
-    background-color: #ff7600;
+.loginBtn:hover {
+  color: #fdfdfd !important;
+  background-color: #ff7600;
 }
-.signupBtn{
-    color: #060c1c !important;
-    border-color: #060c1c !important;
+.signupBtn {
+  color: #060c1c !important;
+  border-color: #060c1c !important;
 }
-.signupBtn:hover{
-    color: #fdfdfd !important;
-    background-color: #060c1c;
+.signupBtn:hover {
+  color: #fdfdfd !important;
+  background-color: #060c1c;
+}
+
+/* Small screen size */
+@media (min-width: 576px) {
+  /* container fuild */
+  .Container {
+    padding: 2rem 5rem;
+  }
+  /* col with info */
+  .Col {
+    padding: 3rem;
+  }
+  /* col title font size */
+  .Fs {
+    font-size: 2rem !important;
+  }
+  /* col flex container */
+  .d-cont {
+    font-size: 1rem !important;
+  }
+  /* col icon display control */
+  .d-cont > i {
+    display: none;
+  }
+  /* col para font size */
+  .d-cont > .fs-2 {
+    font-size: 2rem !important;
+    text-align: center;
+  }
+  /* col button size */
+  .btn-Sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.2rem;
+  }
+}
+
+/* Medium screen size */
+@media (min-width: 768px) {
+  .Container {
+    padding: 2rem 5rem;
+  }
+  .Col {
+    padding: 3rem;
+  }
+  .Fs {
+    font-size: 2rem !important;
+  }
+  .d-cont {
+    font-size: 1rem !important;
+  }
+  .d-cont > i {
+    display: none;
+  }
+  .d-cont > .fs-2 {
+    font-size: 2rem !important;
+    text-align: center;
+  }
+  .btn-Sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+  }
+}
+
+/* larg screen size*/
+@media (min-width: 992px) {
+  .Container {
+    padding: 1.5rem 4.5rem;
+  }
+  .Col {
+    padding: 2.5rem;
+  }
+  .Fs {
+    font-size: 2rem !important;
+  }
+  .d-cont {
+    font-size: 0.8rem !important;
+  }
+  .d-cont > i {
+    display: block;
+  }
+  .d-cont > .fs-2 {
+    font-size: 1.5rem !important;
+  }
+  .btn-Sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.2rem;
+  }
+}
+
+/* Extar larger screen size */
+@media screen and (min-width: 1200px) {
+  .Container {
+    padding: 2rem 5rem;
+  }
+  .Col {
+    padding: 3rem;
+  }
+  .Fs {
+    font-size: 2.5rem !important;
+  }
+  .d-cont {
+    font-size: 1rem !important;
+  }
+  .d-cont > .fs-2 {
+    font-size: 2rem !important;
+  }
+  .btn-Sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+  }
+}
+
+/* Extar extar larger screen size */
+@media screen and (min-width: 1400px) {
+  .Container {
+    padding: 3rem 6rem;
+  }
+  .Col {
+    padding: 4rem;
+  }
+  .d-cont {
+    font-size: 1rem !important;
+  }
+  .d-cont > .fs-2 {
+    font-size: 2rem !important;
+  }
+  .btn-Sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+  }
+}
+
+/* Extar extar larger screen size */
+@media screen and (min-width: 1500px) {
+  .Container {
+    padding: 3rem 6rem;
+  }
+  .Col {
+    padding: 5rem;
+  }
+  .Fs {
+    font-size: 2.5rem !important;
+    width: 65%;
+  }
+  .d-cont {
+    width: 75%;
+    margin-top: 4rem !important;
+    font-size: 1.2rem !important;
+  }
+  .d-cont > .fs-2 {
+    font-size: 2rem !important;
+  }
+  .btn-Sm {
+    margin-top: 4rem !important;
+    padding: 0.275rem 0.65rem;
+    font-size: 1.2rem;
+    border-radius: 0.23rem;
+  }
 }
