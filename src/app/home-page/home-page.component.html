@@ -26,10 +26,10 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item dropdown">
+        <li ngbDropdown class="nav-item dropdown">
           <a
+            ngbDropdownToggle
             class="nav-link dropdown-toggle"
-            href="#"
             id="navbarDropdown"
             role="button"
             data-bs-toggle="dropdown"
@@ -37,7 +37,11 @@
           >
             Design
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul
+            ngbDropdownMenu
+            class="dropdown-menu"
+            aria-labelledby="navbarDropdown"
+          >
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider" /></li>
@@ -47,15 +51,53 @@
       </ul>
       <!-- List of Buttons -->
       <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li ngbDropdown class="nav-item dropdown" *ngIf="user">
+          <div class="d-flex algin-items-center">
+            <img
+              class="rounded-circle"
+              [src]="user.profile"
+              height="35"
+              alt="userPic"
+            />
+            <a
+              ngbDropdownToggle
+              class="nav-link fw-bold dropdown-toggle"
+              id="navbarDropdown2"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {{ user.name }}
+            </a>
+            <ul
+              ngbDropdownMenu
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown"
+            >
+              <li><a class="dropdown-item" href="#">Your profile</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <!-- TODO change url -->
+                <a
+                  class="dropdown-item"
+                  href="http://localhost:8000/auth/logout"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="!user">
           <button
+            routerLink="/loginOne"
             class="btn btn-sm btn-outline-success rounded-pill px-3 py-1 me-2 loginBtn"
           >
             Log In
           </button>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!user">
           <button
+            routerLink="/loginOne/newAccount"
             class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1 signupBtn"
           >
             Sign Up
