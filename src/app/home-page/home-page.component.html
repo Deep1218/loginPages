@@ -74,15 +74,14 @@
               class="dropdown-menu"
               aria-labelledby="navbarDropdown"
             >
-              <li><a class="dropdown-item" href="#">Your profile</a></li>
+              <li class="dropdown-item" role="button">
+                <i class="fa fa-user-circle-o me-2" aria-hidden="true"></i>
+                Your profile
+              </li>
               <li><hr class="dropdown-divider" /></li>
-              <li>
-                <!-- TODO change url -->
-                <a
-                  class="dropdown-item"
-                  href="http://localhost:8000/auth/logout"
-                  >Logout</a
-                >
+              <li class="dropdown-item" role="button" (click)="onLogOut()">
+                <i class="fa fa-sign-out me-2" aria-hidden="true"></i>
+                logout
               </li>
             </ul>
           </div>

@@ -1,5 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../shared/auth.service';
 @Component({
   selector: 'app-login-one',
   templateUrl: './login-one.component.html',
@@ -14,7 +15,7 @@ export class LoginOneComponent implements OnInit, DoCheck {
   passwordTooltipPosition: string = '';
   passwordTooltipMessage: string = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: [
         '',
