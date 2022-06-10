@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 export interface User {
-  _id: String;
+  _id?: String;
   name: String;
-  registerType: String;
-  googleId?: String;
-  profile: String;
-  phoneNo: Number;
   email: String;
+  registerType?: String;
+  googleId?: String;
+  profile?: String;
+  phoneNo?: Number;
+  password?: String;
 }
 interface response {
-  error?: string;
+  status?: string;
   message?: String;
   user?: User;
 }
@@ -23,9 +25,39 @@ interface response {
 export class AuthService {
   apiUrl: String = 'http://localhost:8000/auth';
   user: BehaviorSubject<any> = new BehaviorSubject(null);
+  error: BehaviorSubject<string> = new BehaviorSubject('');
 
-  constructor(private httpClient: HttpClient, private route: Router) {}
+  constructor(
+    private httpClient: HttpClient,
+    private route: Router,
+    private cookieService: CookieService
+  ) {
+    if (this.cookieService.get('error')) {
+      this.error.next(this.cookieService.get('error'));
+    }
+  }
 
+  registerUser(userData: any) {
+    console.log(userData);
+    this.httpClient
+      .post<response>(`${this.apiUrl}/register`, userData, {
+        withCredentials: true,
+      })
+      .subscribe((response) => {
+        try {
+          console.log(response);
+
+          if (response.status == 'Success') {
+            // this.user.next(response.user);
+            this.route.navigate(['/home']);
+          } else {
+            console.log(response.message);
+          }
+        } catch (error) {
+          console.log('Error in registerUser()', error);
+        }
+      });
+  }
   logOut() {
     this.httpClient
       .get<response>(`${this.apiUrl}/logout`, {
@@ -33,11 +65,11 @@ export class AuthService {
       })
       .subscribe((response) => {
         try {
-          if (response.message) {
+          if (response.status == 'Success') {
             this.user.next(null);
-            // this.route.navigate(['/loginOne']);
+            // this.route.navigate(['/home']); //TODO change url
           } else {
-            throw new Error(response.error);
+            console.log(response.message);
           }
         } catch (error) {
           console.log('Error in logOut()', error);
@@ -49,14 +81,21 @@ export class AuthService {
       .get<response>(`${this.apiUrl}/user`, { withCredentials: true })
       .subscribe((response) => {
         try {
-          if (response.message) {
+          if (response.status == 'Success') {
             this.user.next(response.user);
           } else {
-            throw new Error(response.error);
+            console.log(response.message);
           }
         } catch (error) {
           console.log('Error in getUser()', error);
         }
       });
+  }
+  clearError() {
+    if (this.cookieService.get('error')) {
+      console.log('working');
+      this.cookieService.delete('error');
+      console.log(this.cookieService.delete('error'));
+    }
   }
 }

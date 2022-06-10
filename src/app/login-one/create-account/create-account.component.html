@@ -141,6 +141,7 @@
                     type="submit"
                     class="btn btn-primary px-4 fw-bold rounded-pill text-uppercase"
                     style="background-color: #060c1c"
+                    [disabled]="!newAccount.valid"
                   >
                     create
                   </button>
@@ -196,3 +197,4 @@
     </div>
   </div>
 </div>
+<app-toast aria-live="polite" aria-atomic="true"></app-toast>

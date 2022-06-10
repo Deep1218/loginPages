@@ -92,6 +92,7 @@
                   <button
                     class="btn btn-primary px-4 fw-bold rounded-pill text-uppercase"
                     style="background-color: #060c1c"
+                    [disabled]="!loginForm.valid"
                   >
                     Login
                   </button>
@@ -148,3 +149,4 @@
     </div>
   </div>
 </div>
+<app-toast aria-live="polite" aria-atomic="true"></app-toast>

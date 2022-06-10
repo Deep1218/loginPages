@@ -1,18 +1,13 @@
-import {
-  Component,
-  DoCheck,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../shared/auth.service';
+import { ToastService } from '../shared/toast.service';
 @Component({
   selector: 'app-login-one',
   templateUrl: './login-one.component.html',
   styleUrls: ['./login-one.component.css'],
 })
-export class LoginOneComponent implements OnInit, DoCheck {
+export class LoginOneComponent implements OnInit, DoCheck, OnDestroy {
   loginForm: FormGroup;
 
   emailTooltipPosition: string = '';
@@ -21,7 +16,11 @@ export class LoginOneComponent implements OnInit, DoCheck {
   passwordTooltipPosition: string = '';
   passwordTooltipMessage: string = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private toastService: ToastService
+  ) {
     this.loginForm = this.fb.group({
       email: [
         '',
@@ -44,7 +43,17 @@ export class LoginOneComponent implements OnInit, DoCheck {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.error.subscribe((error) => {
+      if (error != '') {
+        this.toastService.show(error, {
+          classname: 'bg-danger text-light',
+          delay: 5000,
+        });
+        this.authService.error.next('');
+      }
+    });
+  }
 
   ngDoCheck(): void {
     //Email ToolTip
@@ -83,5 +92,7 @@ export class LoginOneComponent implements OnInit, DoCheck {
   onSubmitLogin() {
     console.log(this.loginForm.value);
   }
-  loginWithGoogle() {}
+  ngOnDestroy(): void {
+    this.authService.clearError();
+  }
 }
