@@ -92,6 +92,7 @@
                   <button
                     class="btn btn-primary px-4 fw-bold rounded-pill text-uppercase"
                     style="background-color: #060c1c"
+                    [disabled]="!loginForm.valid"
                   >
                     Login
                   </button>
@@ -109,14 +110,16 @@
               <div
                 class="d-flex align-items-center justify-content-between px-3"
               >
-                <button
-                  class="btn btn-light rounded-pill px-3 py-1"
-                  style="border-color: #060c1c !important; color: #060c1c"
-                  (click)="loginWithGoogle()"
-                >
-                  <i class="fa fa-google me-2" aria-hidden="true"></i>Login with
-                  Google
-                </button>
+                <!-- TODO change google auth url -->
+                <a href="http://localhost:8000/auth/google/login">
+                  <button
+                    class="btn btn-light rounded-pill px-3 py-1"
+                    style="border-color: #060c1c !important; color: #060c1c"
+                  >
+                    <i class="fa fa-google me-2" aria-hidden="true"></i>Login
+                    with Google
+                  </button>
+                </a>
                 <button
                   class="btn btn-light rounded-pill px-3 py-1"
                   style="border-color: #060c1c !important; color: #060c1c"
@@ -146,3 +149,4 @@
     </div>
   </div>
 </div>
+<app-toast aria-live="polite" aria-atomic="true"></app-toast>

@@ -1,5 +1,8 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { AuthService, User } from 'src/app/shared/auth.service';
+import { ToastService } from 'src/app/shared/toast.service';
 import { CustomValidators } from '../../providers/custom-validator';
 
 @Component({
@@ -7,7 +10,7 @@ import { CustomValidators } from '../../providers/custom-validator';
   templateUrl: './create-account.component.html',
   styleUrls: ['./create-account.component.css'],
 })
-export class CreateAccountComponent implements OnInit, DoCheck {
+export class CreateAccountComponent implements OnInit, DoCheck, OnDestroy {
   newAccount!: FormGroup;
 
   fullNameTooltipPosition: string = '';
@@ -25,7 +28,11 @@ export class CreateAccountComponent implements OnInit, DoCheck {
   confirmPasswordTooltipPosition: string = '';
   confirmPasswordTooltipMessage: string = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private toastService: ToastService
+  ) {
     this.newAccount = this.fb.group(
       {
         fullName: [
@@ -52,7 +59,7 @@ export class CreateAccountComponent implements OnInit, DoCheck {
           [
             Validators.required,
             Validators.pattern(
-              '([a-zA-Z\\.\\-_]+)?[a-zA-Z]+@[a-z-_]+(\\.[a-z]+){1,}'
+              "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
             ),
           ],
         ],
@@ -74,7 +81,18 @@ export class CreateAccountComponent implements OnInit, DoCheck {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.error.subscribe((error) => {
+      if (error != '') {
+        this.toastService.show(error, {
+          classname: 'bg-danger text-light',
+          delay: 5000,
+        });
+        this.authService.error.next('');
+      }
+    });
+  }
+
   ngDoCheck(): void {
     //Full Name ToolTip
     if (this.newAccount.get('fullName')?.touched) {
@@ -163,6 +181,17 @@ export class CreateAccountComponent implements OnInit, DoCheck {
   }
 
   onSubmit() {
-    console.log(this.newAccount);
+    console.log(this.newAccount.value);
+    const userData: User = {
+      name: this.newAccount.value['fullName'],
+      email: this.newAccount.value['email'],
+      phoneNo: this.newAccount.value['phoneNumber'],
+      password: this.newAccount.value['password'],
+    };
+    // console.log(userData);
+    this.authService.registerUser(userData);
+  }
+  ngOnDestroy(): void {
+    this.authService.clearError();
   }
 }

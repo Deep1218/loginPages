@@ -7,12 +7,14 @@ import { LoginOneRoutingModule } from './login-one-routing.module';
 import { LoginOneComponent } from './login-one.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { ToastComponent } from '../components/toast/toast.component';
 
 @NgModule({
   declarations: [
     LoginOneComponent,
     ForgotPasswordComponent,
     CreateAccountComponent,
+    ToastComponent,
   ],
   imports: [
     CommonModule,

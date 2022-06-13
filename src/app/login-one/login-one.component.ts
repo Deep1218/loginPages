@@ -1,12 +1,13 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { AuthService, User } from '../shared/auth.service';
+import { ToastService } from '../shared/toast.service';
 @Component({
   selector: 'app-login-one',
   templateUrl: './login-one.component.html',
   styleUrls: ['./login-one.component.css'],
 })
-export class LoginOneComponent implements OnInit, DoCheck {
+export class LoginOneComponent implements OnInit, DoCheck, OnDestroy {
   loginForm: FormGroup;
 
   emailTooltipPosition: string = '';
@@ -15,14 +16,18 @@ export class LoginOneComponent implements OnInit, DoCheck {
   passwordTooltipPosition: string = '';
   passwordTooltipMessage: string = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private toastService: ToastService
+  ) {
     this.loginForm = this.fb.group({
       email: [
         '',
         [
           Validators.required,
           Validators.pattern(
-            '([a-zA-Z\\.\\-_]+)?[a-zA-Z]+@[a-z-_]+(\\.[a-z]+){1,}'
+            "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
           ),
         ],
       ],
@@ -38,7 +43,17 @@ export class LoginOneComponent implements OnInit, DoCheck {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.error.subscribe((error) => {
+      if (error != '') {
+        this.toastService.show(error, {
+          classname: 'bg-danger text-light',
+          delay: 5000,
+        });
+        this.authService.error.next('');
+      }
+    });
+  }
 
   ngDoCheck(): void {
     //Email ToolTip
@@ -75,7 +90,15 @@ export class LoginOneComponent implements OnInit, DoCheck {
     }
   }
   onSubmitLogin() {
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
+    const userData: User = {
+      email: this.loginForm.value['email'],
+      password: this.loginForm.value['password'],
+    };
+    // console.log(userData);
+    this.authService.logiInUser(userData);
   }
-  loginWithGoogle() {}
+  ngOnDestroy(): void {
+    this.authService.clearError();
+  }
 }
