@@ -59,7 +59,7 @@ export class CreateAccountComponent implements OnInit, DoCheck, OnDestroy {
           [
             Validators.required,
             Validators.pattern(
-              '([a-zA-Z\\.\\-_]+)?[a-zA-Z]+@[a-z-_]+(\\.[a-z]+){1,}'
+              "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
             ),
           ],
         ],

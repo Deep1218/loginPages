@@ -24,6 +24,6 @@ export class HomePageComponent implements OnInit {
     }
   }
   onLogOut() {
-    this.authService.logOut();
+    this.authService.logOutUser();
   }
 }

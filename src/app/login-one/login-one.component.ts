@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../shared/auth.service';
+import { AuthService, User } from '../shared/auth.service';
 import { ToastService } from '../shared/toast.service';
 @Component({
   selector: 'app-login-one',
@@ -27,7 +27,7 @@ export class LoginOneComponent implements OnInit, DoCheck, OnDestroy {
         [
           Validators.required,
           Validators.pattern(
-            '([a-zA-Z\\.\\-_]+)?[a-zA-Z]+@[a-z-_]+(\\.[a-z]+){1,}'
+            "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
           ),
         ],
       ],
@@ -90,7 +90,13 @@ export class LoginOneComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
   onSubmitLogin() {
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
+    const userData: User = {
+      email: this.loginForm.value['email'],
+      password: this.loginForm.value['password'],
+    };
+    // console.log(userData);
+    this.authService.logiInUser(userData);
   }
   ngOnDestroy(): void {
     this.authService.clearError();

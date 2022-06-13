@@ -5,18 +5,18 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 export interface User {
-  _id?: String;
-  name: String;
-  email: String;
-  registerType?: String;
-  googleId?: String;
-  profile?: String;
+  _id?: string;
+  name?: string;
+  email: string;
+  registerType?: string;
+  googleId?: string;
+  profile?: string;
   phoneNo?: Number;
-  password?: String;
+  password?: string;
 }
-interface response {
-  status?: string;
-  message?: String;
+export interface response {
+  status: string;
+  message: string;
   user?: User;
 }
 @Injectable({
@@ -37,6 +37,24 @@ export class AuthService {
     }
   }
 
+  logiInUser(userData: any) {
+    this.httpClient
+      .post<response>(`${this.apiUrl}/login`, userData, {
+        withCredentials: true,
+      })
+      .subscribe((response) => {
+        try {
+          if (response.status == 'Success') {
+            // this.user.next(response.user);
+            this.route.navigate(['/home']);
+          } else {
+            console.log(response.message);
+          }
+        } catch (error) {
+          console.log('Error in logInUser()', error);
+        }
+      });
+  }
   registerUser(userData: any) {
     console.log(userData);
     this.httpClient
@@ -45,20 +63,18 @@ export class AuthService {
       })
       .subscribe((response) => {
         try {
-          console.log(response);
-
           if (response.status == 'Success') {
-            // this.user.next(response.user);
+            this.user.next(response.user);
             this.route.navigate(['/home']);
           } else {
             console.log(response.message);
           }
         } catch (error) {
-          console.log('Error in registerUser()', error);
+          console.log('Error in RegisterUser()', error);
         }
       });
   }
-  logOut() {
+  logOutUser() {
     this.httpClient
       .get<response>(`${this.apiUrl}/logout`, {
         withCredentials: true,
@@ -90,6 +106,15 @@ export class AuthService {
           console.log('Error in getUser()', error);
         }
       });
+  }
+  forgotPassword(userData: any) {
+    return this.httpClient.post<response>(
+      `${this.apiUrl}/forgotPassword`,
+      userData,
+      {
+        withCredentials: true,
+      }
+    );
   }
   clearError() {
     if (this.cookieService.get('error')) {
