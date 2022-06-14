@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'loginOne', //TODO change before completion
+    redirectTo: 'loginTwo', //TODO change before completion
     pathMatch: 'full',
   },
   {
