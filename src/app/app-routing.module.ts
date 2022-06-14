@@ -8,6 +8,11 @@ const routes: Routes = [
       import('./login-one/login-one.module').then((m) => m.LoginOneModule),
   },
   {
+    path: 'loginTwo',
+    loadChildren: () =>
+      import('./login-two/login-two.module').then((m) => m.LoginTwoModule),
+  },
+  {
     path: 'home',
     loadChildren: () =>
       import('./home-page/home-page.module').then((m) => m.HomePageModule),
@@ -21,6 +26,11 @@ const routes: Routes = [
     path: 'home-page',
     loadChildren: () =>
       import('./home-page/home-page.module').then((m) => m.HomePageModule),
+  },
+  {
+    path: 'loginTwo',
+    loadChildren: () =>
+      import('./login-two/login-two.module').then((m) => m.LoginTwoModule),
   },
 ];
 
