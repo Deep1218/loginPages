@@ -1,0 +1,74 @@
+<div
+  class="d-flex flex-column container-fluid justify-content-center align-items-center p-4"
+  style="width: 100%; height: 100vh; background-color: rgb(243 244 246)"
+>
+  <div class="row bg-white border text-center px-4" style="width: 498px">
+    <div
+      class="col-12 my-3 pt-3 d-flex justify-content-center align-items-center"
+    >
+      <img src="assets/img/menestagram-logo-text.png" alt="logo" />
+    </div>
+    <div class="col-12">
+      <form action="" class="my-3">
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">Phone number, username, or email</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="d-grid gap-2 mb-3">
+          <button class="btn btn-primary fw-bold">Log in</button>
+        </div>
+        <div class="position-relative my-4">
+          <hr />
+          <p
+            class="position-absolute top-50 start-50 translate-middle bg-white fw-bold text-black-50 px-4"
+          >
+            OR
+          </p>
+        </div>
+        <div class="mt-4 mb-2" role="button">
+          <p
+            class="d-flex justify-content-center align-items-center text-primary fw-bold m-0"
+          >
+            <i class="fa fa-facebook-official fs-5 me-2" aria-hidden="true"></i>
+            Log in with Facebook
+          </p>
+        </div>
+        <!-- TODO error message -->
+        <a routerLink="/forgot-password" class="link">Forgot password?</a>
+      </form>
+    </div>
+  </div>
+  <div class="row bg-white border text-center mt-3" style="width: 498px">
+    <div class="col-12 px-4 py-3">
+      <p class="text-black mb-0 px-4">
+        Don't have an account?
+        <a routerLink="/signup" class="link text-primary fw-bold m-0 p-0"
+          >Sign Up</a
+        >
+      </p>
+    </div>
+  </div>
+  <p class="my-3">Get the app.</p>
+  <div class="row m-0 p-0 justify-content-center">
+    <div class="col">
+      <img src="assets/img/app-store.svg" width="140" alt="appStore" />
+    </div>
+    <div class="col">
+      <img src="assets/img/play-store.svg" width="150" alt="playStore" />
+    </div>
+  </div>
+</div>
